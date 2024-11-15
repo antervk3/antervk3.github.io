@@ -12,48 +12,30 @@
 </head>
 <body>
     <h1>Text Replacer</h1>
-    <textarea id="inputText" placeholder="Paste your text here..."></textarea>
-    <div>
-        <input id="findChar" type="text" placeholder="Character to replace">
-        <input id="replaceChar" type="text" placeholder="Replace with">
-        <button onclick="addRule()">Add Rule</button>
-    </div>
-    <div id="rulesList"></div>
-    <button onclick="applyReplacements()">Apply Replacements</button>
+    <button onclick="applyReplacements()">Run Replacement</button>
     <div id="output">Modified Text: <span id="modifiedText"></span></div>
 
     <script>
-        const rules = {};
+        // Hardcoded input text
+        const inputText = "hello world";
 
-        function addRule() {
-            const findChar = document.getElementById("findChar").value;
-            const replaceChar = document.getElementById("replaceChar").value;
-
-            if (findChar && replaceChar) {
-                rules[findChar] = replaceChar;
-                displayRules();
-                document.getElementById("findChar").value = '';
-                document.getElementById("replaceChar").value = '';
-            }
-        }
-
-        function displayRules() {
-            const rulesList = document.getElementById("rulesList");
-            rulesList.innerHTML = "<h3>Current Rules:</h3>";
-            for (const [key, value] of Object.entries(rules)) {
-                rulesList.innerHTML += `<p>${key} ➔ ${value}</p>`;
-            }
-        }
+        // Hardcoded replacement rules
+        const rules = {
+            "h": ".",
+            "w": "[",
+            "l": "4"
+        };
 
         function applyReplacements() {
-            const inputText = document.getElementById("inputText").value;
             let modifiedText = inputText;
 
+            // Apply each replacement rule
             for (const [findChar, replaceChar] of Object.entries(rules)) {
-                const regex = new RegExp(findChar, "g");
+                const regex = new RegExp(findChar, "g"); // Match globally
                 modifiedText = modifiedText.replace(regex, replaceChar);
             }
 
+            // Display modified text
             document.getElementById("modifiedText").innerText = modifiedText;
         }
     </script>

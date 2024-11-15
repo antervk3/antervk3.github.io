@@ -14,14 +14,23 @@
             font-family: Arial, sans-serif; 
             margin-top: 50px; 
         }
+        .menu-box {
+            background-color: white; 
+            color: black; 
+            padding: 20px; 
+            border-radius: 30px; /* Squircle */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+            position: relative;
+            text-align: center;
+        }
         textarea, button { 
             width: 300px; 
             margin: 10px; 
             padding: 15px; 
             font-size: 16px; 
             border: none; 
-            border-radius: 30px; /* Squircle effect */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); /* Subtle shadow for depth */
+            border-radius: 30px; /* Squircle */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5); 
         }
         textarea { 
             height: 100px; 
@@ -41,6 +50,10 @@
             border: 1px solid white; 
             box-shadow: 0 6px 8px rgba(255, 255, 255, 0.5); 
         }
+        button.clicked { 
+            background-color: green; 
+            color: white; 
+        }
         #output { 
             margin-top: 20px; 
             font-size: 18px; 
@@ -49,13 +62,38 @@
         #modifiedText { 
             color: lightgreen; 
         }
+        /* Arrow Design */
+        .arrow {
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 50px solid red;
+            margin: 20px auto;
+            position: relative;
+        }
+        .arrow::after {
+            content: '';
+            position: absolute;
+            top: -45px;
+            left: -25px;
+            width: 0;
+            height: 0;
+            border-left: 25px solid transparent;
+            border-right: 25px solid transparent;
+            border-top: 40px solid white;
+        }
+        .arrow.clicked {
+            border-top-color: green;
+        }
     </style>
 </head>
 <body>
     <h1>Text Replacer</h1>
-    <div style="background-color: white; color: black; padding: 20px; border-radius: 30px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);">
+    <div class="menu-box">
         <textarea id="inputText" placeholder="Enter your text here..."></textarea>
-        <button onclick="applyReplacements()">Replace Text</button>
+        <button id="replaceButton" onclick="applyReplacements()">Replace Text</button>
+        <div class="arrow" id="arrow"></div>
     </div>
     <div id="output">Modified Text: <span id="modifiedText"></span></div>
 
@@ -80,6 +118,12 @@
 
             // Display the modified text
             document.getElementById("modifiedText").innerText = modifiedText;
+
+            // Change the button and arrow color
+            const button = document.getElementById("replaceButton");
+            const arrow = document.getElementById("arrow");
+            button.classList.add("clicked");
+            arrow.classList.add("clicked");
         }
     </script>
 </body>

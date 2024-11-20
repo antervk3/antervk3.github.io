@@ -135,6 +135,15 @@
             button.classList.add("clicked");
             arrow.classList.add("clicked");
         }
+
+        // Focus on textarea with '/' or Tab key
+        document.addEventListener("keydown", (event) => {
+            const textBox = document.getElementById("inputText");
+            if (event.key === "/" || event.key === "Tab") {
+                event.preventDefault(); // Prevent default Tab behavior (focus cycling)
+                textBox.focus();
+            }
+        });
     </script>
 </body>
 </html>
